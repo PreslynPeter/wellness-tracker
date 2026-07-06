@@ -1,31 +1,40 @@
-# Hi there, I'm Preslyn! 👋
+# 6-Month Wellness Blueprint & Diet Tracker 🥗📊
 
-I am a **Backend Software Engineer** with over 5 years of professional experience, specializing in building scalable systems, microservices, and AI-driven applications. I hold a Master's degree in Computer Science and Engineering and love turning complex backend logic into elegant, user-focused solutions.
-
----
-
-### 🚀 Featured Applications
-
-| Project | Description | Live Demo | Source Code |
-| :--- | :--- | :--- | :--- |
-| **6-Month Wellness Blueprint** | An AI-powered health and diet tracker that uses multimodal AI to analyze food images and calculate macronutrient profiles. | [🚀 Launch App](https://wellness-tracker-goal-oriented.streamlit.app) | [💻 GitHub Repo](https://github.com/PreslynPeter/wellness-tracker) |
-| **Audio-to-Text Transcriber** | A speech-to-text processing pipeline using OpenAI Whisper and Streamlit to handle automated transcription for large audio files. | [🚀 Launch App](YOUR_TRANSCRIBER_STREAMLIT_URL) | [💻 GitHub Repo](YOUR_TRANSCRIBER_REPO_URL) |
+A goal-oriented, interactive AI wellness application designed to help users track, manage, and optimize their health and nutritional goals over a structured 6-month timeline. Built using Python, Streamlit, and the Google Gemini API, this tool combines multimodal AI analysis with data tracking to turn everyday food logging into actionable wellness insights.
 
 ---
 
-### 🛠️ Technical Toolkit
+### 🌐 Live Deployment
 
-* **Languages:** Java, Python, SQL
-* **Backend Frameworks:** Spring Boot, RESTful APIs, Microservices Architecture
-* **AI & Data:** Google Gemini API, OpenAI Whisper, Streamlit, Pandas
-* **Build & Infrastructure:** Gradle, Maven, Git, CI/CD pipelines
+* **Live Demo:** [🚀 Launch the App Live](https://wellness-tracker-goal-oriented.streamlit.app)
+* **Source Code:** [💻 GitHub Repository](https://github.com/PreslynPeter/wellness-tracker)
 
 ---
 
-### 📝 Beyond Code
-When I'm not writing backend services, you can find me:
-* 🌱 Tending to my raised-bed vegetable and berry garden.
-* 🧁 Experimenting with new baking recipes in the kitchen.
-* ✍️ Writing poetry and articles inspired by nature.
+### ⏳ The 6-Month Goal Tracking Framework
 
-📬 **Let's Connect:** [LinkedIn](YOUR_LINKEDIN_URL) | [Email](YOUR_EMAIL_ADDRESS)
+The application is structured around a **6-month timeline** to help users transition from baseline habits to sustainable wellness success. It tracks progression across key phases:
+
+* **Months 1–2 (Foundation & Baseline):** Focuses on consistent logging, uncovering nutritional gaps, and establishing daily caloric and high-protein baselines.
+* **Months 3–4 (Optimization & Conditioning):** Measures tracking consistency against target goals, fine-tuning macronutrient ratios based on personal fitness metrics.
+* **Months 5–6 (Sustainability & Blueprint Generation):** Evaluates long-term trends and uses accumulated historical data to generate a customized, long-term personal health blueprint.
+
+---
+
+### ✨ Salient Features
+
+* **Multimodal AI Food Analysis:** Users can upload food images or provide text descriptions of meals. Integrated with the **Google Gemini API**, the app instantly analyzes the inputs to estimate calorie counts and break down protein, fat, and carbohydrate content.
+* **Dynamic Daily Metrics Tracking:** Features interactive dashboards to track daily water intake, sleep patterns, workout duration (e.g., treadmill sessions), and exact protein consumption targets.
+* **Progressive Interactive Analytics:** Utilizes pandas-driven data frames to store tracking history, visualizing user metrics over time to show exact progress against the 6-month timeline goals.
+* **Secure Environment Architecture:** Configured via encrypted Streamlit Secrets (`TOML` formatting) to keep internal API keys protected and completely safe from public exposure.
+* **Production-Ready Deployment:** Packaged cleanly with an automated dependency pipeline (`requirements.txt`), fully optimized for lightweight cloud hosting environments.
+
+---
+
+### 🛠️ Tech Stack & Dependencies
+
+* **Frontend/UI:** Streamlit
+* **AI Core:** Google Generative AI Python SDK (`google-generativeai`)
+* **Data Processing:** Pandas
+* **Image Management:** Pillow (PIL)
+* **Configuration:** Python-Dotenv / TOML
