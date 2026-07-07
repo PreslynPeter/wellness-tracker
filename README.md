@@ -1,36 +1,40 @@
-# 🙋‍♀️ 6-Month Personal Wellness & AI Nutrition Tracker
+# 6-Month Wellness Blueprint & Diet Tracker 🥗📊
 
-An AI-powered web application designed to help women track their 6-month weight loss milestones, log daily physical metrics, and automate nutritional analysis using computer vision. Built with Python, Streamlit, and the Gemini 3.5 Flash API.
-
-![Streamlit App](https://img.shields.io/badge/Framework-Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![Python](https://img.shields.io/badge/Language-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+A goal-oriented, interactive AI wellness application designed to help users track, manage, and optimize their health and nutritional goals over a structured 6-month timeline. Built using Python, Streamlit, and the Google Gemini API, this tool combines multimodal AI analysis with data tracking to turn everyday food logging into actionable wellness insights.
 
 ---
 
-## 🚀 Key Features
+### 🌐 Live Deployment
 
-- **Personalized 6-Month Blueprint:** Captures user baseline telemetry (weight, age, height) and configures explicit daily nutrient parameters (protein, caloric ceiling, fluid targets).
-- **Computer Vision Meal Logging:** Integrates a multimodal generative AI pipeline allowing users to upload plate images for automated food identification and macronutrient estimation (protein, carbs, fats).
-- **Dynamic Session Architecture:** Utilizes continuous state preservation (`st.session_state`) across tab navigation arrays to maintain a seamless data workflow.
-- **Execution Scoreboard Dashboard:** Consolidates daily inputs, performs physiological mass calculations ($1\text{g P/C} = 4\text{kcal}, 1\text{g F} = 9\text{kcal}$), and evaluates daily execution compliance via an algorithmic $0\text{-}100\%$ scoring system.
-- **Secure Environment Configurations:** Implements runtime decryption of protected API credentials using standalone `.env` abstractions to isolate production keys.
+* **Live Demo:** [🚀 Launch the App Live](https://wellness-tracker-goal-oriented.streamlit.app)
+* **Source Code:** [💻 GitHub Repository](https://github.com/PreslynPeter/wellness-tracker)
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+### ⏳ The 6-Month Goal Tracking Framework
 
-- **Frontend / UI:** Streamlit (Dynamic single-page script processing execution architecture)
-- **AI Core Engine:** Google Gemini 1.5 Flash API (Multimodal prompt optimization layer)
-- **Data Engineering:** Pandas (Dataframe restructuring and series mapping arrays)
-- **Image Operations:** Pillow (PIL Image stream validation and metadata rendering)
-- **Environment Logic:** Python-Dotenv (Local OS system environment parsing)
+The application is structured around a **6-month timeline** to help users transition from baseline habits to sustainable wellness success. It tracks progression across key phases:
+
+* **Months 1–2 (Foundation & Baseline):** Focuses on consistent logging, uncovering nutritional gaps, and establishing daily caloric and high-protein baselines.
+* **Months 3–4 (Optimization & Conditioning):** Measures tracking consistency against target goals, fine-tuning macronutrient ratios based on personal fitness metrics.
+* **Months 5–6 (Sustainability & Blueprint Generation):** Evaluates long-term trends and uses accumulated historical data to generate a customized, long-term personal health blueprint.
 
 ---
 
-## ⚙️ Installation & Local Setup
+### ✨ Salient Features
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/your-username/womens-ai-wellness-tracker.git](https://github.com/your-username/womens-ai-wellness-tracker.git)
-cd womens-ai-wellness-tracker
+* **Multimodal AI Food Analysis:** Users can upload food images or provide text descriptions of meals. Integrated with the **Google Gemini API**, the app instantly analyzes the inputs to estimate calorie counts and break down protein, fat, and carbohydrate content.
+* **Dynamic Daily Metrics Tracking:** Features interactive dashboards to track daily water intake, sleep patterns, workout duration (e.g., treadmill sessions), and exact protein consumption targets.
+* **Progressive Interactive Analytics:** Utilizes pandas-driven data frames to store tracking history, visualizing user metrics over time to show exact progress against the 6-month timeline goals.
+* **Secure Environment Architecture:** Configured via encrypted Streamlit Secrets (`TOML` formatting) to keep internal API keys protected and completely safe from public exposure.
+* **Production-Ready Deployment:** Packaged cleanly with an automated dependency pipeline (`requirements.txt`), fully optimized for lightweight cloud hosting environments.
+
+---
+
+### 🛠️ Tech Stack & Dependencies
+
+* **Frontend/UI:** Streamlit
+* **AI Core:** Google Generative AI Python SDK (`google-generativeai`)
+* **Data Processing:** Pandas
+* **Image Management:** Pillow (PIL)
+* **Configuration:** Python-Dotenv / TOML
