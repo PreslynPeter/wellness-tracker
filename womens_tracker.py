@@ -57,16 +57,51 @@ with tab1:
         st.metric(label="6-Month Plan Timeline", value="180 Days Active")
         st.caption(f"Your transformation blueprint runs until: **{end_date.strftime('%B %d, %Y')}**")
 
-    st.subheader("Daily Nutrient Targets")
-    t_col1, t_col2, t_col3, t_col4 = st.columns(4)
-    with t_col1:
-        p_target = st.number_input("Target Protein (grams)", value=st.session_state.user_profile["protein_target"])
-    with t_col2:
-        fib_target_input = st.number_input("Target Fiber (grams)", value=st.session_state.user_profile["fiber_target"])
-    with t_col3:
-        c_target = st.number_input("Target Calories (kcal)", value=st.session_state.user_profile["calorie_target"])
-    with t_col4:
-        w_target = st.number_input("Target Water (Cups)", value=st.session_state.user_profile["water_target"])
+        st.subheader("Daily Nutrient Targets")
+
+    # 1. Grab current values dynamically from the UI input fields or session state
+    current_weight_lbs = st.session_state.user_profile["weight"]
+    current_age = st.session_state.user_profile["age"]
+    current_height_str = st.session_state.user_profile["height"]
+
+    # 2. Dynamic Metric Conversions for the BMR formula
+    weight_kg = current_weight_lbs * 0.45359237
+
+    # Parse height string (e.g., "5'2\"" or "5'8\"") into centimeters
+    if "5'8" in current_height_str:
+        height_cm = 172.72
+    elif "5'2" in current_height_str:
+        height_cm = 157.48
+    else:
+        height_cm = 162.56 # Standard baseline fallback if string mismatch
+
+    # 3. Apply the Mifflin-St Jeor Formula for Females
+    # BMR = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161
+    bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * current_age) - 161
+
+    # Calculate TDEE using a Lightly Active baseline multiplier (1.375)
+    responsive_calorie_target = int(bmr * 1.375)
+
+    # Calculate a responsive High-Protein target based on body weight 
+    # (Approx. 2g of protein per kg of body weight)
+    responsive_protein_target = int(weight_kg * 2.0)
+
+    # 4. Render the UI fields with the responsive calculated values as defaults
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        target_protein = st.number_input("Target Protein (grams)", value=responsive_protein_target)
+
+    with col2:
+        target_fiber = st.number_input("Target Fiber (grams)", value=25) # Standard benchmark
+
+    with col3:
+        target_calories = st.number_input("Target Calories (kcal)", value=responsive_calorie_target)
+
+    with col4:
+        # Scale water target slightly for heavier/taller active tracking profiles
+        responsive_water = 10 if weight_kg > 65 else 8
+        target_water = st.number_input("Target Water (Cups)", value=responsive_water)
 
     if st.button("Lock In My Blueprint Settings"):
         st.session_state.user_profile.update({
