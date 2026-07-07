@@ -106,8 +106,8 @@ with tab1:
     if st.button("Lock In My Blueprint Settings"):
         st.session_state.user_profile.update({
             "weight": weight, "age": age, "height": height,
-            "protein_target": p_target, "fiber_target": fib_target_input, 
-            "calorie_target": c_target, "water_target": w_target, "start_date": start_d
+            "protein_target": target_protein, "fiber_target": target_fiber, 
+            "calorie_target": target_calories, "water_target": target_water, "start_date": start_d
         })
         st.success("Profile goals updated! Move to Tab 2 to log metrics.")
 
