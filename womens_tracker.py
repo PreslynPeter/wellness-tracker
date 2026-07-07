@@ -20,13 +20,13 @@ GENAI_API_KEY = os.environ.get("GEMINI_API_KEY")
 # --- 2. STATE MANAGEMENT ---
 if "user_profile" not in st.session_state:
     st.session_state.user_profile = {
-        "weight": 141.0,
-        "age": 31,
-        "height": "5'2\"",
-        "protein_target": 100,  # grams
+        "weight": 110.0,        # 50 kgs converted to lbs
+        "age": 25,
+        "height": "5'8\"",
+        "protein_target": 105,  # grams
         "fiber_target": 25,     # grams
-        "calorie_target": 1500, # kcal
-        "water_target": 8,       # cups
+        "calorie_target": 1785, # kcal
+        "water_target": 10,     # cups
         "start_date": datetime.date.today()
     }
 
