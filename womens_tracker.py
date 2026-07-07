@@ -31,11 +31,11 @@ if "user_profile" not in st.session_state:
 
 #  ADD THIS BLOCK TO INITIALIZE YOUR MEAL LOG LIST
 if "current_today_meals" not in st.session_state:
-    st.session_state.current_today_meals = []
+    st.session_state.current_today_meals = {}
 
 #  ADD THIS BLOCK to track historical daily performance records
 if "daily_history" not in st.session_state:
-    st.session_state.daily_history = []
+    st.session_state.daily_history = {}
 
 # --- 3. APP NAVIGATION TABS ---
 tab1, tab2, tab3 = st.tabs(["📋 1. Profile & 6-Month Goals", "📸 2. Daily Log (AI Photo & Steps)", "📊 3. End-of-Day Scoreboard"])
