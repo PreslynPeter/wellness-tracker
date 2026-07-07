@@ -10,31 +10,24 @@ from dotenv import load_dotenv
 # --- 1. INITIAL SETUP & APP CONFIG ---
 st.set_page_config(page_title="6-Month Wellness Blueprint", layout="wide")
 
-# Force Python to find the .env file in the exact same folder as this script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(script_dir, '.env')
 load_dotenv(dotenv_path=env_path)
 
 GENAI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
-# --- 2. STATE MANAGEMENT ---
+# --- 2. STATE MANAGEMENT (Initialize Profile if missing) ---
 if "user_profile" not in st.session_state:
     st.session_state.user_profile = {
-        "weight": 110.0,        # 50 kgs converted to lbs
-        "age": 25,
-        "height": "5'8\"",
-        "protein_target": 105,  # grams
-        "fiber_target": 25,     # grams
-        "calorie_target": 1785, # kcal
-        "water_target": 10,     # cups
+        "weight": 150.50,
+        "age": 31,
+        "height": "5'2\"",
+        "protein_target": 105,
+        "fiber_target": 25,
+        "calorie_target": 1785,
+        "water_target": 10,
         "start_date": datetime.date.today()
     }
-
-if "daily_history" not in st.session_state:
-    st.session_state.daily_history = []
-
-if "current_today_meals" not in st.session_state:
-    st.session_state.current_today_meals = {}
 
 # --- 3. APP NAVIGATION TABS ---
 tab1, tab2, tab3 = st.tabs(["📋 1. Profile & 6-Month Goals", "📸 2. Daily Log (AI Photo & Steps)", "📊 3. End-of-Day Scoreboard"])
@@ -44,6 +37,8 @@ tab1, tab2, tab3 = st.tabs(["📋 1. Profile & 6-Month Goals", "📸 2. Daily Lo
 # ==========================================
 with tab1:
     st.header("Personal Details & Targets")
+    
+    # 1. First, render the input widgets so Python captures the live user variables
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -57,52 +52,44 @@ with tab1:
         st.metric(label="6-Month Plan Timeline", value="180 Days Active")
         st.caption(f"Your transformation blueprint runs until: **{end_date.strftime('%B %d, %Y')}**")
 
-        st.subheader("Daily Nutrient Targets")
+    # 2. RUN RESPONSIVE MATH (Directly mapping to live input widget parameters)
+    current_weight_lbs = weight    
+    current_age = age              
+    current_height_str = height    
 
-    # 1. Grab current values dynamically from the UI input fields or session state
-    current_weight_lbs = st.session_state.user_profile["weight"]
-    current_age = st.session_state.user_profile["age"]
-    current_height_str = st.session_state.user_profile["height"]
-
-    # 2. Dynamic Metric Conversions for the BMR formula
     weight_kg = current_weight_lbs * 0.45359237
 
-    # Parse height string (e.g., "5'2\"" or "5'8\"") into centimeters
     if "5'8" in current_height_str:
         height_cm = 172.72
     elif "5'2" in current_height_str:
         height_cm = 157.48
     else:
-        height_cm = 162.56 # Standard baseline fallback if string mismatch
+        height_cm = 162.56 
 
-    # 3. Apply the Mifflin-St Jeor Formula for Females
-    # BMR = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161
     bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * current_age) - 161
-
-    # Calculate TDEE using a Lightly Active baseline multiplier (1.375)
     responsive_calorie_target = int(bmr * 1.375)
-
-    # Calculate a responsive High-Protein target based on body weight 
-    # (Approx. 2g of protein per kg of body weight)
     responsive_protein_target = int(weight_kg * 2.0)
 
-    # 4. Render the UI fields with the responsive calculated values as defaults
-    col1, col2, col3, col4 = st.columns(4)
+    # 3. FIX: Move subheader OUT of column 3 so it spans the left side cleanly
+    st.subheader("Daily Nutrient Targets")
 
-    with col1:
+    # 4. Render the dynamically calculated nutrient targets
+    nut_col1, nut_col2, nut_col3, nut_col4 = st.columns(4)
+
+    with nut_col1:
         target_protein = st.number_input("Target Protein (grams)", value=responsive_protein_target)
 
-    with col2:
-        target_fiber = st.number_input("Target Fiber (grams)", value=25) # Standard benchmark
+    with nut_col2:
+        target_fiber = st.number_input("Target Fiber (grams)", value=25)
 
-    with col3:
+    with nut_col3:
         target_calories = st.number_input("Target Calories (kcal)", value=responsive_calorie_target)
 
-    with col4:
-        # Scale water target slightly for heavier/taller active tracking profiles
+    with nut_col4:
         responsive_water = 10 if weight_kg > 65 else 8
         target_water = st.number_input("Target Water (Cups)", value=responsive_water)
 
+    # 5. Lock-in save button actions
     if st.button("Lock In My Blueprint Settings"):
         st.session_state.user_profile.update({
             "weight": weight, "age": age, "height": height,
