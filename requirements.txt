@@ -1,5 +1,6 @@
-google-generativeai
 streamlit
+google-generativeai
 python-dotenv
 pillow
 pandas
+psycopg2-binary
